@@ -1,0 +1,14 @@
+{
+  "bootstrap.servers": "",
+  "security.protocol": "",
+  "ssl.endpoint.identification.algorithm": "",
+  "sasl.mechanism": "",
+  "acks": "",
+  "sasl.jaas.config": "",
+  "retries": -1,
+  "batch.size": -1,
+  "linger.ms": -1,
+  "buffer.memory": -1,
+  "key.serializer": "",
+  "value.serializer": ""
+}
