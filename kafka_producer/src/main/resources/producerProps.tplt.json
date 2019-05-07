@@ -1,0 +1,14 @@
+{
+  "bootstrap.servers": "list_of_the_bootstrap_servers",
+  "security.protocol": "SASL_SSL",
+  "ssl.endpoint.identification.algorithm": "https",
+  "sasl.mechanism": "PLAIN",
+  "acks": "all",
+  "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"<username>\" password=\"<password>\" serviceName=\"<service_name>\";",
+  "retries": 0,
+  "batch.size": 16384,
+  "linger.ms": 1,
+  "buffer.memory": 33554432,
+  "key.deserializer": "key_serializer_class",
+  "value.deserializer": "value_serializer_class"
+}
