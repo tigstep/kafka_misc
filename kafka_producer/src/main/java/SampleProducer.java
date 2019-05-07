@@ -5,18 +5,20 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.log4j.BasicConfigurator;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
 public class SampleProducer {
     static Logger LOGGER = Logger.getLogger(SampleProducer.class);
 
     private static File getFile(){
-        File propFile = new File(System.getProperty("user.dir") + "/resources/properties.json");
+        File propFile = new File(System.getProperty("user.dir") + "/resources/producerProps.json");
         return propFile;
     };
 
@@ -32,7 +34,8 @@ public class SampleProducer {
     }
 
     public static void main(String[] args) {
-        BasicConfigurator.configure();
+        String log4jConfigFile = System.getProperty("user.dir") + "/resources/log4j_producer.properties";
+        PropertyConfigurator.configure(log4jConfigFile);
 
         File propFile = getFile();
         Map<String, String> props = getProperties(propFile);
