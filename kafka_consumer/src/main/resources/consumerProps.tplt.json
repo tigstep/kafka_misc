@@ -6,6 +6,5 @@
   "security.protocol": "SASL_SSL",
   "ssl.endpoint.identification.algorithm": "https",
   "sasl.mechanism": "PLAIN",
-  "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"<username>\" password=\"<password>\" serviceName=\"<service_name>\";",
-  "test": "test"
+  "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"<username>\" password=\"<password>\" serviceName=\"<service_name>\";"
 }
