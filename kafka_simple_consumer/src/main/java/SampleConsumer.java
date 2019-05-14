@@ -1,12 +1,11 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
-
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -74,11 +73,12 @@ public class SampleConsumer {
                 else continue;
             }
             consumerRecords.forEach(record -> {
-                LOGGER.info(String.format("Consumer Record:(%s, %s, %d, %d)\n",
+                LOGGER.info(String.format("Consumer Record:(%s, %s, %d, %d, %s)\n",
                         record.key(),
                         record.value(),
                         record.partition(),
-                        record.offset()
+                        record.offset(),
+                        record.headers()
                 ));
             });
 

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -10,9 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-
+import org.apache.kafka.common.header.Headers;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
+import org.springframework.kafka.support.KafkaHeaders;
 
 public class SampleProducer {
     static Logger LOGGER = Logger.getLogger(SampleProducer.class);
@@ -48,7 +50,6 @@ public class SampleProducer {
 
         String topicName = args[0];
 
-
         Properties kafkaProps = new Properties();
         kafkaProps.put("bootstrap.servers", props.get("bootstrap.servers"));
         kafkaProps.put("security.protocol", props.get("security.protocol"));
@@ -65,14 +66,16 @@ public class SampleProducer {
 
         Producer<String, String> producer = new KafkaProducer
                 <String, String>(kafkaProps);
+        Date date = new Date();
 
-
+        long timeMilli = -1;
         for(int i = 0; i < 10; i++) {
-            System.out.println("Before the producer.send creation");
-            producer.send(new ProducerRecord<>(topicName,
-                    Integer.toString(i), Integer.toString(i)));
-            System.out.println("After the producer.send creation");
-            System.out.println("Message sent successfully");
+            LOGGER.info("Producer message is : " + Integer.toString(i));
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>(topicName, Integer.toString(i), "kafka test message");
+            Headers headers = record.headers();
+            timeMilli = date.getTime();
+            headers.add("DATE", String.valueOf(timeMilli).getBytes());
+            producer.send(record);
         }
         producer.close();
     }
