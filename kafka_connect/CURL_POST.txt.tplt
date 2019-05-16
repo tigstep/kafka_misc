@@ -1,0 +1,18 @@
+TO ADD A CONNECTOR
+
+CURL -X POST \
+-H "Content-Type: application/json" \
+--data @source_oracle.json \
+http://<connect_instance_ip>:8083/connectors
+
+OR
+
+CURL -X POST \
+-H "Content-Type: application/json" \
+--data '<config_json_string>' \
+http://<connect_instance_ip>:8083/connectors
+
+TO DELETE A CONNECTOR
+
+curl -i -X DELETE
+http://<connect_instance_ip>:8083/connectors/<connector_name>

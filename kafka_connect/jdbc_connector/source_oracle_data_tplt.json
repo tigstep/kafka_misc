@@ -1,0 +1,13 @@
+{"name": "<name_of_the_connector>",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": <number_of_tasks>,
+    "connection.url": "jdbc:oracle:thin:@<host_name>:<host_port>/<service_name>",
+    "connection.user": "user_name",
+    "connection.password": "<password>",
+    "table.whitelist": "<list_of_tables_to_be_polled>",
+    "mode": "<poll_type>",
+    "incrementing.column.name": "<col_name_to_monitor>",
+    "topic.prefix": "<topic_prefix_for_each_table>"
+  }
+}
