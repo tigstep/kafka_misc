@@ -1,0 +1,12 @@
+{
+  "name": "<name_of_the_connector>",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.user": "<username>",
+    "connection.password": "<password>",
+    "tasks.max": 1,
+    "topics": "<name_of_the_topic>",
+    "connection.url": "jdbc:oracle:thin:@<host_name>:<host_port>/<service_name>",
+    "auto.create": true
+  }
+}
