@@ -11,8 +11,14 @@
     <modules>
         <module>kafka_simple_producer</module>
         <module>kafka_simple_consumer</module>
+        <module>kafka_avro_consumer</module>
     </modules>
-
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
     <dependencies>
     <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
         <dependency>
