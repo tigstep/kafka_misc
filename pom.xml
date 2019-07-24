@@ -12,6 +12,7 @@
         <module>kafka_simple_producer</module>
         <module>kafka_simple_consumer</module>
         <module>kafka_avro_consumer</module>
+        <module>zookeeper</module>
     </modules>
     <repositories>
         <repository>
