@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: kfk3
+spec:
+  type: LoadBalancer
+  ports:
+  - name: port-9092
+    port: 9092
+    protocol: TCP 
+  selector:
+    app: kafka3

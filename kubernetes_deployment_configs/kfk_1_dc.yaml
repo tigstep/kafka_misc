@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kafka1
+spec:
+  replicas: 1
+  selector:
+    app: kafka1
+  template:
+    metadata:
+      labels:
+        app: kafka1
+    spec:
+      containers:
+        - name: kafka1
+          image: artrepo.firstrepublic.com:5101/dct_docker_virtual/confluentinc/cp-enterprise-kafka
+        ports:
+            - containerPort: 9092
+        env:
+            - name: KAFKA_ZOOKEEPER_CONNECT
+              value: "zoo1:2181,zoo2:2181,zoo3:2181"
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: "PLAINTEXT://kfk1:9092"
+            - name: KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS
+              value: "kfk1:9092,kfk2:9092,kfk3:9092"
+            - name: KAFKA_METRIC_REPORTERS
+              value: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
+         volumeMounts:
+            - mountPath: "/var/lib/kafka/data"
+              name: "persistantvolume"
+      volumes:
+        -
+            name: "persistantvolume"
+            persistentVolumeClaim:
+                claimName: kfk1clm

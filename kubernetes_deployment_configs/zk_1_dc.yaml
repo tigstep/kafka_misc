@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: zookeeper1
+spec:
+  replicas: 1
+  selector:
+    app: zookeeper1
+  template:
+    metadata:
+      labels:
+        app: zookeeper1
+    spec:
+      containers:
+      - name: zookeeper1
+        image: artrepo.firstrepublic.com:5101/dct_docker_virtual/confluentinc/cp-zookeeper
+        ports:
+        - containerPort: 2181
+        - containerPort: 2888
+        - containerPort: 3888
+        env:
+        - name: ZOOKEEPER_CLIENT_PORT
+          value: "2181"
+        - name: ZOOKEEPER_SERVER_ID
+          value: "1"
+        - name: ZOOKEEPER_SERVERS
+          value: "0.0.0.0:2888:3888;zoo2:2888:3888;zoo3:2888:3888"
+        volumeMounts:
+          - mountPath: "/var/lib/zookeeper/data"
+            name: "persistantvolume"
+            subPath: "data"
+          - mountPath: "/var/lib/zookeeper/log"
+            name: "persistantvolume"
+            subPath: "log"
+      volumes:
+        -
+            name: "persistantvolume"
+            persistentVolumeClaim:
+                claimName: zk1clm
