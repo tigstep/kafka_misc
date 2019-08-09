@@ -1,10 +1,22 @@
 {
+  //GENERAL SETTINGS
   "bootstrap.servers": "list_of_the_bootstrap_servers",
   "group.id": "consumer_group_id",
+  "security.protocol": "SASL_SSL",
+
+  //DESERIALIZER SETTINGS
   "key.deserializer": "key_serializer_class",
   "value.deserializer": "value_serializer_class",
-  "security.protocol": "SASL_SSL",
+
+  //SSL SETTINGS
   "ssl.endpoint.identification.algorithm": "https",
+  "ssl.truststore.location": "truststore.jks location",
+  "ssl.truststore.password": "truststore password",
+  "ssl.keystore.location": "keystore password",
+  "ssl.keystore.password": "keystore password",
+  "ssl.key.password": "key password",
+
+  //SASL SETTINGS
   "sasl.mechanism": "PLAIN",
   "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"<username>\" password=\"<password>\" serviceName=\"<service_name>\";"
 }

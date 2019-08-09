@@ -54,15 +54,24 @@ public class SampleProducer {
         kafkaProps.put("bootstrap.servers", props.get("bootstrap.servers"));
         kafkaProps.put("security.protocol", props.get("security.protocol"));
         kafkaProps.put("ssl.endpoint.identification.algorithm", props.get("ssl.endpoint.identification.algorithm"));
-        kafkaProps.put("sasl.mechanism", props.get("sasl.mechanism"));
         kafkaProps.put("acks", props.get("acks"));
-        kafkaProps.put("sasl.jaas.config", props.get("sasl.jaas.config"));
         kafkaProps.put("retries", props.get("retries"));
         kafkaProps.put("batch.size", props.get("batch.size"));
         kafkaProps.put("linger.ms", props.get("linger.ms"));
         kafkaProps.put("buffer.memory", props.get("buffer.memory"));
         kafkaProps.put("key.serializer", props.get("key.serializer"));
         kafkaProps.put("value.serializer", props.get("value.serializer"));
+
+        //SSL SETTINGS
+        kafkaProps.put("ssl.truststore.location", props.get("ssl.truststore.location"));
+        kafkaProps.put("ssl.truststore.password", props.get("ssl.truststore.password"));
+        kafkaProps.put("ssl.keystore.location", props.get("ssl.keystore.location"));
+        kafkaProps.put("ssl.keystore.password", props.get("ssl.keystore.password"));
+        kafkaProps.put("ssl.key.password", props.get("ssl.key.password"));
+
+        //SASL SETTINGS
+        //kafkaProps.put("sasl.mechanism", props.get("sasl.mechanism"));
+        //kafkaProps.put("sasl.jaas.config", props.get("sasl.jaas.config"));
 
         Producer<String, String> producer = new KafkaProducer
                 <String, String>(kafkaProps);
