@@ -15,8 +15,8 @@ import org.apache.kafka.common.header.Headers;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
-public class SampleProducer {
-    static Logger LOGGER = Logger.getLogger(SampleProducer.class);
+public class AvroProducer {
+    static Logger LOGGER = Logger.getLogger(AvroProducer.class);
 
     private static File getFile(){
         File propFile = new File(System.getProperty("user.dir") + "/resources/producerProps.json");
@@ -67,6 +67,9 @@ public class SampleProducer {
         kafkaProps.put("ssl.keystore.location", props.get("ssl.keystore.location"));
         kafkaProps.put("ssl.keystore.password", props.get("ssl.keystore.password"));
         kafkaProps.put("ssl.key.password", props.get("ssl.key.password"));
+
+        //SCHEMA REGISTRY
+        kafkaProps.put("schema.registry.url", props.get("schema.registry.url"));
 
         //SASL SETTINGS
         //kafkaProps.put("sasl.mechanism", props.get("sasl.mechanism"));

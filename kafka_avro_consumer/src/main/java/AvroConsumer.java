@@ -54,8 +54,17 @@ public class AvroConsumer {
         kafkaProps.put("schema.registry.url", props.get("schema.registry.url"));
         kafkaProps.put("security.protocol", props.get("security.protocol"));
         kafkaProps.put("ssl.endpoint.identification.algorithm", props.get("ssl.endpoint.identification.algorithm"));
-        kafkaProps.put("sasl.mechanism", props.get("sasl.mechanism"));
-        kafkaProps.put("sasl.jaas.config", props.get("sasl.jaas.config"));
+
+        //SSL SETTINGS
+        kafkaProps.put("ssl.truststore.location", props.get("ssl.truststore.location"));
+        kafkaProps.put("ssl.truststore.password", props.get("ssl.truststore.password"));
+        kafkaProps.put("ssl.keystore.location", props.get("ssl.keystore.location"));
+        kafkaProps.put("ssl.keystore.password", props.get("ssl.keystore.password"));
+
+        //SASL SETTINGS
+
+        //kafkaProps.put("sasl.mechanism", props.get("sasl.mechanism"));
+        //kafkaProps.put("sasl.jaas.config", props.get("sasl.jaas.config"));
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(kafkaProps);
 

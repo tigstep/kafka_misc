@@ -1,0 +1,21 @@
+{
+  "bootstrap.servers": "broker_list",
+  "security.protocol": "SSL|SSL_SASL|PLAINTEXT",
+  "acks": "all",
+  "retries": 0,
+  "batch.size": 16384,
+  "linger.ms": 1,
+  "buffer.memory": 33554432,
+
+  "ssl.endpoint.identification.algorithm": "https|http",
+  "ssl.truststore.location": "truststore_location",
+  "ssl.truststore.password": "truststore_password",
+  "ssl.keystore.location": "keystore_location",
+  "ssl.keystore.password": "keystore_password",
+  "ssl.key.password": "key_password",
+
+  "key.serializer": "org.apache.kafka.common.serialization.StringSerializer",
+  "value.serializer": "io.confluent.kafka.serializers.KafkaAvroSerializer",
+
+  "schema.registry.url": "schema_registry_url"
+}
