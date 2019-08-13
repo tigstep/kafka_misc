@@ -1,0 +1,45 @@
+https://np2kafkacon02v.corp.frbnp2.com:8082/topics
+
+#To list the topics
+
+curl "http://<rest_proxy_host>:8082/topics"
+
+#To produce to a topic
+curl -X POST -H "Content-Type: application/vnd.kafka.json.v2+json" \
+--data '{"records":[{"value":{"data_key_2": "data_value_2"}}]}' \
+"https://<rest_proxy_host>:8082/topics/<topic_name>" \
+--cacert <cert>.pem
+
+# Create a consumer for JSON data, starting at the beginning of the topic's
+# log. The consumer group is called "my_json_consumer" and the instance is "my_consumer_instance".
+
+$ curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" -H "Accept: application/vnd.kafka.v2+json" \
+--data '{"name": "<consumer_instance_name>", "format": "json", "auto.offset.reset": "earliest"}' \
+https://<rest_proxy_hostname>:8082/consumers/<consumer_group_name> --cacert <cert>.pem
+#The above will return
+{"instance_id":"<customer_instance_name>","base_uri":"https://<rest_proxy_host>:8082/consumers/<consumer_group_name>/instances/<consumer_instance_name>"}
+
+# Subscribe the consumer to a topic
+
+$ curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
+--data '{"topics":["tigran_ssl_rest_test"]}' \
+https://<rest_proxy_host>:8082/consumers/<consumer_grou_name>/instances/<consumer_instance_id>/subscription \
+--cacert <cert>.pem
+
+# To consume data from a topic using the base URL in the first response.
+
+$ curl -X GET -H "Accept: application/vnd.kafka.json.v2+json" \
+https://<rest_proxy_host>:8082/consumers/<consmer_group_name>/instances/<consumer_instance_name>/records \
+--cacert <cert>.pem
+
+
+# Finally, close the consumer with a DELETE to make it leave the group and clean up
+# its resources.
+
+$ curl -X DELETE -H "Accept: application/vnd.kafka.v2+json" \
+https://<rest_proxy_host>:8082/consumers/<consumer_group_name>/instances/<consumer_instance_name> \
+--cacert <cert>.pem
+
+#SIDENOTES To convert from .jks to .pem
+
+keytool -importkeystore -srckeystore <keystore>.jks -destkeystore keystorenp2kafkabrk01v.p12 -srcalias <alias_of_the_cert> -srcstoretype jks -deststoretype pkcs12
