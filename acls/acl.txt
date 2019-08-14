@@ -1,0 +1,2 @@
+#To list topic acls
+kafka-acls --list --topic tigran_ssl_rest_test --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=np2kafkabrk01v.corp.frbnp2.com:2181
