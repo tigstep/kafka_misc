@@ -3,6 +3,6 @@
         {
             "principal": "principal_1",
             "allow": ["publish", "consume"],
-            "host_ips": ["0.0.0.0"]
+            "hostIPs": ["0.0.0.0"]
         }
 }

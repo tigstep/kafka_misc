@@ -5,7 +5,9 @@ import org.apache.kafka.common.resource.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.gson.*;
@@ -30,16 +32,33 @@ public class ACLUpdater {
         adminClient.createAcls(aclBindings);
     }
 
-    public static Map<String, String> ingestConfigs() throws FileNotFoundException {
+    public static String[] ingestFlattenConfigs() throws FileNotFoundException {
+        String[] acl_commands = new String[100];
         Gson gson = new Gson();
-        Map<String, String> configMap = new HashMap<>();
-        Object object = gson.fromJson(new FileReader("../resources/acl.json"), Object.class);
+        ACL[] objects = gson.fromJson(new FileReader(System.getProperty("user.dir") + "/resources/acl.json"), ACL[].class);
+        for (ACL obj:objects){
+            System.out.println(obj.getUser());
+            ACLPerms[] perms = obj.getACLPerms();
+            for (ACLPerms perm:perms){
+                System.out.println(Arrays.toString(perm.getAllow()));
+                System.out.println(Arrays.toString(perm.getHostIP()));
+            }
 
-        return configMap;
+            //ACLPerms[] perms = gson.fromJson(obj.getACLPerms().toString(), ACLPerms[].class);
+
+        }
+        /*for (ACL obj:objects){
+            ACLPerms[] perms = gson.fromJson(obj.getACLPerms(), ACLPerms[].class);
+            for (ACLPerms perm:perms){
+                System.out.println(perm.hostIPs());
+            }
+
+        }*/
+        return acl_commands;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Map<String, String> configMap = ingestConfigs();
-        System.out.println(configMap);
+        String[] object = ingestFlattenConfigs();
+
     }
 }
