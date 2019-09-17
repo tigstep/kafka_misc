@@ -14,7 +14,7 @@
         <module>kafka_avro_consumer</module>
         <module>zookeeper</module>
         <module>kafka_avro_producer</module>
-        <module>acl.updater</module>
+        <module>acl_updater</module>
     </modules>
     <repositories>
         <repository>
