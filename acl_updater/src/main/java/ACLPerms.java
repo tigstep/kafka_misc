@@ -2,9 +2,6 @@ public class ACLPerms {
     private String topic;
     private String[] allow;
     private String[] hostIPs;
-    //private String[] action;
-    //private String actionType;
-    //private String[] host_ips;
 
     public String getTopic() {
         return topic;
